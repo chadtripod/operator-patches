@@ -1,0 +1,16 @@
+#Jenkins token stored/retrieved as kubernetes secret
+apiVersion: spinnaker.armory.io/v1alpha2
+kind: SpinnakerService
+metadata:
+  name: spinnaker
+spec:
+  spinnakerConfig:  
+    config:
+      ci:
+        jenkins:
+          enabled: true
+          masters:
+          - name: <jenkins-master-name>
+            address: https://<jenkins-url>/ # The address your jenkins master is reachable at.
+            username: <jenkins-username>    # The username of the jenkins user to authenticate as.
+            password: encrypted:k8s!n:spinnaker-secrets:!k:jenkins-token
